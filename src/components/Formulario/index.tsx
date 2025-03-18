@@ -3,10 +3,10 @@ import style from './Formulario.module.scss';
 
 import React from 'react'
 import Botao from '../Botao'
-import { ITarefas } from '../../types/tarefa';
+import { ITarefa } from '../../types/tarefa';
 import { v4 as uuidv4 } from 'uuid';
 
-class Formulario extends React.Component<{setTarefas: React.Dispatch<React.SetStateAction<ITarefas[]>>}> {
+class Formulario extends React.Component<{setTarefas: React.Dispatch<React.SetStateAction<ITarefa[]>>}> {
     state = {
         tarefa: "",
         tempo: "00:00"
