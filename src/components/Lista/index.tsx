@@ -1,14 +1,10 @@
 import style from './Lista.module.scss';
 
 import Item from './Item';
-import { ITarefa } from '../../types/tarefa';
+import { useTarefas } from '../../contexts/TarefasContext';
 
-interface ListaProps {
-    tarefas: ITarefa[]
-    selecionaTarefa: (tarefaSelecionada: ITarefa) => void
-}
-
-function Lista({ tarefas, selecionaTarefa }: ListaProps) {
+function Lista() {
+    const { tarefas, selecionaTarefa } = useTarefas();
     return (
         <aside className={style.listaTarefas}>
             <h2>Estudos do dia</h2>

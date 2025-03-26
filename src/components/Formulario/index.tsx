@@ -3,38 +3,29 @@ import style from './Formulario.module.scss';
 
 import React, { useState } from 'react'
 import Botao from '../Botao'
-import { ITarefa } from '../../types/tarefa';
 import { v4 as uuidv4 } from 'uuid';
+import { useTarefas } from '../../contexts/TarefasContext';
 
-interface FormularioProps {
-    setTarefas: React.Dispatch<React.SetStateAction<ITarefa[]>>
-}
-
-function Formulario({ setTarefas }: FormularioProps) {
+function Formulario() {
+    const { adicionarTarefa } = useTarefas();
     const [tarefa, setTarefa] = useState("");
     const [tempo, setTempo] = useState("00:00");
 
-    function adicionarTarefa(evento: React.FormEvent<HTMLFormElement>) {
-        evento.preventDefault();
-        setTarefas(
-            tarefasAntigas =>
-                [
-                    ...tarefasAntigas,
-                    {
-                        tarefa,
-                        tempo,
-                        selecionado: false,
-                        completado: false,
-                        id: uuidv4()
-                    }
-                ]
-        )
+    function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+        event.preventDefault();
+        adicionarTarefa({
+            tarefa,
+            tempo,
+            selecionado: false,
+            completado: false,
+            id: uuidv4()
+        });
         setTarefa("");
         setTempo("00:00");
     }
 
     return (
-        <form className={style.novaTarefa} onSubmit={adicionarTarefa}>
+        <form className={style.novaTarefa} onSubmit={handleSubmit}>
             <div className={style.inputContainer}>
                 <label
                     htmlFor="tarefa"

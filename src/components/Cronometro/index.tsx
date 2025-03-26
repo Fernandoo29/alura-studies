@@ -3,15 +3,11 @@ import style from './Cronometro.module.scss'
 import Botao from '../Botao';
 import Relogio from './Relogio';
 import { tempoParaSegundos } from '../../common/utils/time';
-import { ITarefa } from '../../types/tarefa';
 import { useEffect, useState } from 'react';
+import { useTarefas } from '../../contexts/TarefasContext';
 
-interface CronometroProps {
-    selecionado: ITarefa | undefined
-    finalizarTarefa: () => void
-}
-
-function Cronometro({ selecionado, finalizarTarefa }: CronometroProps) {
+function Cronometro() {
+    const { selecionado, finalizarTarefa } = useTarefas();
     const [tempo, setTempo] = useState<number>();
 
     useEffect(() => {
